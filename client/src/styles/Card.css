@@ -1,0 +1,52 @@
+.cards {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.card {
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    margin: 10px;
+    max-width: 200px;
+    -webkit-transition: transform 0.6s;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transition: transform 0.6s;
+    -webkit-transition: transform 0.6s;
+    position: relative;
+}
+
+.card-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 16px;
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    width: 200px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    height: 100%;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    position: relative;
+}

@@ -1,14 +1,12 @@
 import './styles/App.css'
 import MajorArcana from './components/MajorArcana'
+import Card from './components/Card'
 
 function App() {
   return (
     <div className="App">
       {MajorArcana.map(card => (
-        <div>
-        <p>{card.name}</p>
-        <img src={card.front} style={{width: '200px'}}/>
-        </div>
+        <Card img={card.front} />
       ))}
     </div>
   );
