@@ -1,8 +1,11 @@
-import React from 'react';
+import React from 'react'
+import Nav from '../components/Nav'
 
 const Layouts = (props) => {
    return (
-       <div></div>
+       <div>
+           <Nav />
+       </div>
    )
 }
 

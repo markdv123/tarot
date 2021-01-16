@@ -4,29 +4,33 @@ import Home from './pages/Home'
 import Cards from './pages/Cards'
 import Layouts from './pages/Layouts'
 import Reading from './pages/Reading'
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './styles/Theme'
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route
-          exact path="/"
-          component={() => <Home />}
-        />
-        <Route
-          path="/cards"
-          component={() => <Cards />}
-        />
-        <Route
-          path="/layouts"
-          component={() => <Layouts />}
-        />
-        <Route
-          path="/reading"
-          component={() => <Reading />}
-        />
-      </Switch>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Switch>
+          <Route
+            exact path="/"
+            component={() => <Home />}
+          />
+          <Route
+            path="/cards"
+            component={() => <Cards />}
+          />
+          <Route
+            path="/layouts"
+            component={() => <Layouts />}
+          />
+          <Route
+            path="/reading"
+            component={() => <Reading />}
+          />
+        </Switch>
+      </div>
+    </ThemeProvider>
   );
 }
 
