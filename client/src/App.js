@@ -1,22 +1,15 @@
-import './styles/App.css';
+import './styles/App.css'
+import MajorArcana from './components/MajorArcana'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src='/tarot-cards/chariot.png' className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {MajorArcana.map(card => (
+        <div>
+        <p>{card.name}</p>
+        <img src={card.front} style={{width: '200px'}}/>
+        </div>
+      ))}
     </div>
   );
 }
