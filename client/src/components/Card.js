@@ -16,7 +16,7 @@ const Card = (props) => {
         <div className='cards'>
             <div className={toggleClass ? 'card flip' : 'card'}>
                 <div className='card-front' onClick={flip}>
-                    <img alt='front' src={props.card.front} className='card-img' />
+                    <img alt='front' src={props.card.front} className={props.card.up ? 'card-img' : 'card-img rev'} />
                 </div>
                 <div className='card-back' onClick={flip}>
                     <img alt='back' src='/tarot-cards/back.png' className='card-img' />

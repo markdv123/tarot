@@ -9,7 +9,12 @@ import {
     DialogContentText,
     DialogActions,
     Button,
-    Slide
+    Slide,
+    FormControl,
+    Select,
+    InputLabel,
+    MenuItem,
+    FormHelperText
 } from '@material-ui/core'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -20,13 +25,22 @@ const Reading = (props) => {
     const [cards, setCards] = useState([])
     const [open, setOpen] = useState(false)
     const [card, setCard] = useState({})
+    const [layout, setLayout] = useState(0)
 
     const getCards = () => {
         const deck = MajorArcana
         let drawn = []
         for (let i = 0; i < 3; i++) {
-            let num = Math.floor(Math.random() * Math.floor(deck.length + 1))
-            drawn.push(deck[num])
+            let num = Math.floor(Math.random() * Math.floor(deck.length))
+            let num2 = Math.round(Math.random())
+            let newCard = deck[num]
+            console.log(newCard)
+            if (num2 === 0) {
+                newCard.up = true
+            } else {
+                newCard.up = false
+            }
+            drawn.push(newCard)
             deck.splice(num, 1)
         }
         setCards(drawn)
@@ -35,6 +49,10 @@ const Reading = (props) => {
     useEffect(() => {
         getCards()
     }, [])
+
+    const handleChange = (e) => {
+        setLayout(e.target.value)
+    }
 
     const handleCard = (c) => {
         setCard(c)
@@ -45,14 +63,50 @@ const Reading = (props) => {
         setOpen(false)
     }
 
+    let content = ''
+    switch (layout) {
+        case 0:
+            content = (
+                <div>
+                    <FormControl>
+                        <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            value={layout}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={0}>
+                                <em>Select</em>
+                            </MenuItem>
+                            <MenuItem value={1}>3 Card Layout</MenuItem>
+                        </Select>
+                        <FormHelperText>Select your Layout</FormHelperText>
+                    </FormControl>
+                </div>
+            )
+            break
+        case 1:
+            // getCards()
+            content = (
+                <div>
+                    <h1 color='secondary'>3 Card Layout</h1>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                        {cards.length ? cards.map((c, i) => <Card key={i} card={c} handleCard={handleCard} />) : null}
+                    </div>
+                </div>
+            )
+            break
+        default:
+            content = ''
+            break
+    }
+
     return (
         <div>
             <Nav />
             <div>
-                <h1 color='secondary'>3 Card Layout</h1>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                    {cards.length ? cards.map((c, i) => <Card key={i} card={c} handleCard={handleCard} />) : null}
-                </div>
+                {content}
                 <Dialog
                     open={open}
                     TransitionComponent={Transition}
@@ -64,10 +118,9 @@ const Reading = (props) => {
                     <DialogTitle id="alert-dialog-slide-title" style={{ color: 'white' }}>{card.name}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description" style={{ color: 'white' }}>
-                            <div>
-                                <h4>Meanings:</h4>
-                                {card.upKey}
-                            </div>    
+                            Meanings:
+                                <br />
+                            {card.up ? card.upKey : card.revKey}
                         </DialogContentText>
                         <DialogActions>
                             <Button onClick={handleClose} style={{ color: 'white' }}>

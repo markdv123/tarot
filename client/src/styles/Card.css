@@ -28,7 +28,12 @@
 
 .card-img {
     width: 100%;
+    height: 100%;
     border-radius: 16px;
+}
+
+.card-img.rev {
+    transform: rotate(180deg);
 }
 
 .card.flip {
