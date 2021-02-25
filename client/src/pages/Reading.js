@@ -30,7 +30,7 @@ const Reading = (props) => {
     const getCards = () => {
         const deck = MajorArcana
         let drawn = []
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 22; i++) {
             let num = Math.floor(Math.random() * Math.floor(deck.length))
             let num2 = Math.round(Math.random())
             let newCard = deck[num]
@@ -80,6 +80,7 @@ const Reading = (props) => {
                                 <em>Select</em>
                             </MenuItem>
                             <MenuItem value={1}>3 Card Layout</MenuItem>
+                            <MenuItem value={2}>5 Card Layout</MenuItem>
                         </Select>
                         <FormHelperText>Select your Layout</FormHelperText>
                     </FormControl>
@@ -87,12 +88,27 @@ const Reading = (props) => {
             )
             break
         case 1:
-            // getCards()
             content = (
                 <div>
                     <h1 color='secondary'>3 Card Layout</h1>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                        {cards.length ? cards.map((c, i) => <Card key={i} card={c} handleCard={handleCard} />) : null}
+                        {cards.length ? cards.map((c, i) => {
+                            if (i < 3) {
+                                return <Card key={i} card={c} handleCard={handleCard} />
+                            }}) : null}
+                    </div>
+                </div>
+            )
+            break
+        case 2:
+            content = (
+                <div>
+                    <h1 color='secondary'>5 Card Layout</h1>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                        {cards.length ? cards.map((c, i) => {
+                            if (i < 5) {
+                                return <Card key={i} card={c} handleCard={handleCard} />
+                            }}) : null}
                     </div>
                 </div>
             )
